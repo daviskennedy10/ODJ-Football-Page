@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chidubem Ezenna - Video Highlights</title>
+  <style>
+    body {
+      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG); /* Replaced with a valid URL; update with your image */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #333;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.7);
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+    nav {
+      background-color: #003087;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+    nav .nav-right {
+      display: flex;
+      align-items: center;
+    }
+    .video-section {
+      margin-top: 2rem;
+    }
+    .video-section video {
+      width: 100%;
+      max-width: 720px;
+      height: 405px; /* 16:9 aspect ratio */
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .video-toggle {
+      margin-top: 1rem;
+    }
+    .video-toggle button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #003087;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .video-toggle button:hover {
+      background-color: #ffd700;
+      color: #003087;
+    }
+    .video-toggle button.active {
+      background-color: #ffd700;
+      color: #003087;
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .video-section video {
+        height: 200px; /* Adjust for smaller screens */
+      }
+      .video-toggle button {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div>
+      <a href="index.html">Profile</a>
+      <a href="https://www.instagram.com/odj_skillz/">Instagram</a>
+      <a href="index.html#transfers">Transfers</a>
+      <a href="skills.html">Videos</a> <!-- Updated to match file name -->
+    </div>
+    <div class="nav-right">
+      <a href="#">Login</a>
+    </div>
+  </nav>
+  <div class="container">
+    <h1>Chidubem Ezenna - Video Highlights</h1>
+    <div class="video-section">
+      <video id="videoPlayer" controls>
+        <source src="My Movie 1.MOV" type="video/mov">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-toggle">
+      <button class="active" onclick="switchVideo('skills')">Skills & Goals 1</button>
+      <button onclick="switchVideo('goals')">Skills & Goals 2</button>
+    </div>
+  </div>
+  <script>
+    let currentVideo = 'skills';
+
+    function switchVideo(type) {
+      const videoPlayer = document.getElementById('videoPlayer');
+      const buttons = document.querySelectorAll('.video-toggle button');
+
+      if (type === 'skills') {
+        videoPlayer.src = 'My Movie 1.MOV'; // Update with your skills video path
+      } else if (type === 'goals') {
+        videoPlayer.src = 'Ball Edit 3.mp4'; // Update with your goals video path
+      }
+
+      buttons.forEach(button => button.classList.remove('active'));
+      document.querySelector(`.video-toggle button[onclick="switchVideo('${type}')"]`).classList.add('active');
+      currentVideo = type;
+      videoPlayer.load(); // Reload the video source
+    }
+  </script>
+</body>
+</html>
