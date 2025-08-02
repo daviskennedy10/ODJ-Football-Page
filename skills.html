@@ -6,7 +6,7 @@
   <title>Chidubem Ezenna - Video Highlights</title>
   <style>
     body {
-      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG); /* Replaced with a valid URL; update with your image */
+      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -54,7 +54,7 @@
     .video-section {
       margin-top: 2rem;
     }
-    .video-section video {
+    .video-section iframe {
       width: 100%;
       max-width: 720px;
       height: 405px; /* 16:9 aspect ratio */
@@ -84,13 +84,12 @@
       color: #003087;
     }
 
-    /* Animation Keyframes */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
     @media (max-width: 768px) {
-      .video-section video {
+      .video-section iframe {
         height: 200px; /* Adjust for smaller screens */
       }
       .video-toggle button {
@@ -106,42 +105,43 @@
       <a href="index.html">Profile</a>
       <a href="https://www.instagram.com/odj_skillz/">Instagram</a>
       <a href="index.html#transfers">Transfers</a>
-      <a href="skills.html">Videos</a> <!-- Updated to match file name -->
+      <a href="skills.html">Videos</a>
     </div>
     <div class="nav-right">
       <a href="#">Login</a>
     </div>
   </nav>
+
   <div class="container">
     <h1>Chidubem Ezenna - Video Highlights</h1>
     <div class="video-section">
-      <video id="videoPlayer" controls>
-        <source src="My Movie 1.MOV" type="video/mov">
-        Your browser does not support the video tag.
-      </video>
+      <iframe
+        id="videoPlayer"
+        src="https://www.youtube.com/embed/ZT98ILbXiIY?rel=0"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
     <div class="video-toggle">
       <button class="active" onclick="switchVideo('skills')">Skills & Goals 1</button>
       <button onclick="switchVideo('goals')">Skills & Goals 2</button>
     </div>
   </div>
-  <script>
-    let currentVideo = 'skills';
 
+  <script>
     function switchVideo(type) {
       const videoPlayer = document.getElementById('videoPlayer');
       const buttons = document.querySelectorAll('.video-toggle button');
 
       if (type === 'skills') {
-        videoPlayer.src = 'My Movie 1.MOV'; // Update with your skills video path
+        videoPlayer.src = 'https://www.youtube.com/embed/ZT98ILbXiIY?rel=0&autoplay=1';
       } else if (type === 'goals') {
-        videoPlayer.src = 'Ball Edit 3.mp4'; // Update with your goals video path
+        videoPlayer.src = 'https://www.youtube.com/embed/l5pdk-Yu0Sw?rel=0&autoplay=1';
       }
 
       buttons.forEach(button => button.classList.remove('active'));
       document.querySelector(`.video-toggle button[onclick="switchVideo('${type}')"]`).classList.add('active');
-      currentVideo = type;
-      videoPlayer.load(); // Reload the video source
     }
   </script>
 </body>
