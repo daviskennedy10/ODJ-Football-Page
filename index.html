@@ -64,6 +64,27 @@
       font-weight: bold;
       color: #003087;
     }
+    .profile-container {
+      display: flex;
+      padding: 2rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .player-info {
+      flex: 2;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .info-item {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -111,6 +132,20 @@
       </div>
     </div>
 
+    <div class="profile-container">
+      <div class="player-info">
+        <h2>Player Overview</h2>
+        <div class="info-grid">
+          <div class="info-item"><strong>Nationality:</strong><br>Nigeria</div>
+          <div class="info-item"><strong>Position:</strong><br>Right Winger</div>
+          <div class="info-item"><strong>Club:</strong><br>USC Trojans</div>
+          <div class="info-item"><strong>Preferred Foot:</strong><br>Left</div>
+          <div class="info-item"><strong>Height:</strong><br>6'3" (191 cm)</div>
+          <div class="info-item"><strong>Market Value:</strong><br>€2k</div>
+        </div>
+      </div>
+    </div>
+
     <div class="season-selector">
       <label for="seasonSelect"><strong>Select Season: </strong></label>
       <select id="seasonSelect">
@@ -118,6 +153,7 @@
         <option value="2025b">Season 2025b</option>
         <option value="2024a">Season 2024a</option>
         <option value="2024b">Season 2024b</option>
+        <option value="overall">Overall Balance</option>
       </select>
     </div>
 
@@ -132,23 +168,6 @@
             <th>Assists</th>
             <th>Yellow Cards</th>
             <th>Red Cards</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-
-    <div class="stats-section">
-      <h2>Overall Balance</h2>
-      <table id="overallTable">
-        <thead>
-          <tr>
-            <th>Competition</th>
-            <th>Total Appearances</th>
-            <th>Total Goals</th>
-            <th>Total Assists</th>
-            <th>Total Yellow Cards</th>
-            <th>Total Red Cards</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -201,81 +220,80 @@
     const seasonSelect = document.getElementById("seasonSelect");
     const statsTableBody = document.querySelector("#statsTable tbody");
     const seasonTitle = document.getElementById("seasonTitle");
-    const overallTableBody = document.querySelector("#overallTable tbody");
 
     function renderTable(seasonKey) {
-      const season = seasonStats[seasonKey];
-      seasonTitle.textContent = season.title;
       statsTableBody.innerHTML = "";
 
-      season.rows.forEach(row => {
+      if (seasonKey === "overall") {
+        seasonTitle.textContent = "Overall Balance";
+        const totals = {};
+
+        for (const key in seasonStats) {
+          seasonStats[key].rows.forEach(row => {
+            if (row.comp !== "Total") {
+              if (!totals[row.comp]) {
+                totals[row.comp] = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
+              }
+              totals[row.comp].apps += row.apps;
+              totals[row.comp].goals += row.goals;
+              totals[row.comp].assists += row.assists;
+              totals[row.comp].yellow += row.yellow;
+              totals[row.comp].red += row.red;
+            }
+          });
+        }
+
+        let grand = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
+        for (const comp in totals) {
+          const row = totals[comp];
+          grand.apps += row.apps;
+          grand.goals += row.goals;
+          grand.assists += row.assists;
+          grand.yellow += row.yellow;
+          grand.red += row.red;
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${comp}</td>
+            <td>${row.apps}</td>
+            <td>${row.goals}</td>
+            <td>${row.assists}</td>
+            <td>${row.yellow}</td>
+            <td>${row.red}</td>
+          `;
+          statsTableBody.appendChild(tr);
+        }
+
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${row.comp}</td>
-          <td>${row.apps}</td>
-          <td>${row.goals}</td>
-          <td>${row.assists}</td>
-          <td>${row.yellow}</td>
-          <td>${row.red}</td>
+          <td><strong>Grand Total</strong></td>
+          <td>${grand.apps}</td>
+          <td>${grand.goals}</td>
+          <td>${grand.assists}</td>
+          <td>${grand.yellow}</td>
+          <td>${grand.red}</td>
         `;
         statsTableBody.appendChild(tr);
-      });
-    }
 
-    function renderOverall() {
-      const totals = {};
-      for (const seasonKey in seasonStats) {
-        seasonStats[seasonKey].rows.forEach(row => {
-          if (row.comp !== "Total") {
-            if (!totals[row.comp]) {
-              totals[row.comp] = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
-            }
-            totals[row.comp].apps += row.apps;
-            totals[row.comp].goals += row.goals;
-            totals[row.comp].assists += row.assists;
-            totals[row.comp].yellow += row.yellow;
-            totals[row.comp].red += row.red;
-          }
+      } else {
+        const season = seasonStats[seasonKey];
+        seasonTitle.textContent = season.title;
+        season.rows.forEach(row => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${row.comp}</td>
+            <td>${row.apps}</td>
+            <td>${row.goals}</td>
+            <td>${row.assists}</td>
+            <td>${row.yellow}</td>
+            <td>${row.red}</td>
+          `;
+          statsTableBody.appendChild(tr);
         });
       }
-
-      overallTableBody.innerHTML = "";
-      let grand = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
-      for (const comp in totals) {
-        const row = totals[comp];
-        grand.apps += row.apps;
-        grand.goals += row.goals;
-        grand.assists += row.assists;
-        grand.yellow += row.yellow;
-        grand.red += row.red;
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${comp}</td>
-          <td>${row.apps}</td>
-          <td>${row.goals}</td>
-          <td>${row.assists}</td>
-          <td>${row.yellow}</td>
-          <td>${row.red}</td>
-        `;
-        overallTableBody.appendChild(tr);
-      }
-
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td><strong>Grand Total</strong></td>
-        <td>${grand.apps}</td>
-        <td>${grand.goals}</td>
-        <td>${grand.assists}</td>
-        <td>${grand.yellow}</td>
-        <td>${grand.red}</td>
-      `;
-      overallTableBody.appendChild(tr);
     }
 
     renderTable(seasonSelect.value);
-    renderOverall();
-
     seasonSelect.addEventListener("change", e => renderTable(e.target.value));
   </script>
 </body>
