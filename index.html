@@ -6,7 +6,7 @@
   <title>Chidubem Ezenna - Player Profile</title>
   <style>
     body {
-      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG); /* Replaced with a valid URL; update with your image */
+      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -15,10 +15,10 @@
       padding: 0;
       font-family: Arial, sans-serif;
       color: #333;
-      min-height: 100vh; /* Ensure body takes full viewport height */
+      min-height: 100vh;
     }
     .container {
-      background-color: rgba(255, 255, 255, 0.7); /* Reduced opacity to let background show through */
+      background-color: rgba(255, 255, 255, 0.7);
       margin: 0 auto;
       max-width: 1200px;
       padding: 1rem;
@@ -29,126 +29,48 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      animation: fadeIn 1s ease-out;
     }
     nav a {
       color: white;
       text-decoration: none;
       margin: 0 1rem;
-      transition: color 0.3s ease;
     }
     nav a:hover {
       color: #ffd700;
-    }
-    nav .nav-right {
-      display: flex;
-      align-items: center;
     }
     .profile-header {
       display: flex;
       align-items: center;
       padding: 1rem;
-      background-color: rgba(227, 227, 227, 0.9); /* Semi-transparent background */
+      background-color: rgba(227, 227, 227, 0.9);
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      animation: fadeInDown 1s ease-out;
-      position: relative; /* For centering #7 */
-      min-height: 150px; /* Ensure space for the number */
-    }
-    .profile-header .player-photo {
-      margin-right: 2rem; /* Space between photo and center */
-      flex-shrink: 0; /* Prevent photo from shrinking */
+      position: relative;
+      min-height: 150px;
     }
     .profile-header img {
       width: 150px;
-      height: auto;
       border-radius: 12px;
-      transition: transform 0.3s ease;
-    }
-    .profile-header img:hover {
-      transform: scale(1.05);
     }
     .profile-header .player-details {
-      margin-left: auto; /* Push details to the right */
-      text-align: right; /* Align text to the right */
-    }
-    .profile-header .player-details h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-    .profile-header .player-details p {
-      margin: 0.5rem 0;
+      margin-left: auto;
+      text-align: right;
     }
     .profile-header .number {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 4rem; /* Large font size for #7 */
+      font-size: 4rem;
       font-weight: bold;
       color: #003087;
-      z-index: 1; /* Ensure it stays above other content */
-    }
-    .market-value {
-      background-color: #e6f3ff;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-weight: bold;
-      color: #003087;
-      animation: bounceIn 1s ease-out;
-    }
-    .profile-container {
-      display: flex;
-      padding: 2rem;
-      gap: 2rem;
-      flex-wrap: wrap;
-      animation: fadeIn 1.5s ease-out;
-    }
-    .player-info {
-      flex: 2;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .info-item {
-      background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      transition: transform 0.3s ease;
-    }
-    .info-item:hover {
-      transform: translateY(-5px);
-    }
-    .season-selector {
-      margin: 1rem 2rem;
-      text-align: center;
-      animation: bounceIn 1.2s ease-out;
-    }
-    select {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      transition: border-color 0.3s ease;
-    }
-    select:focus {
-      border-color: #003087;
-      outline: none;
-    }
-    .stats-section {
-      padding: 2rem;
     }
     table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
       overflow: hidden;
-      animation: slideUp 1.5s ease-out;
+      margin-bottom: 2rem;
     }
     th, td {
       padding: 0.75rem;
@@ -160,47 +82,6 @@
     }
     tbody tr:last-child td {
       font-weight: bold;
-    }
-
-    /* Animation Keyframes */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounceIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    @media (max-width: 768px) {
-      .profile-header {
-        flex-direction: column;
-        text-align: center;
-        min-height: auto;
-      }
-      .profile-header .player-photo {
-        margin-right: 0;
-        margin-bottom: 1rem;
-      }
-      .profile-header .player-details {
-        margin-left: 0;
-        text-align: center;
-      }
-      .profile-header .number {
-        position: static;
-        transform: none;
-        margin: 0.5rem 0;
-        font-size: 3rem;
-      }
     }
   </style>
 </head>
@@ -217,6 +98,7 @@
         <a href="index.html">Login</a>
       </div>
     </nav>
+
     <div class="profile-header">
       <div class="player-photo">
         <img src="Screenshot_2025-07-21_at_00.15.00-removebg-preview.png" alt="Chidubem Ezenna">
@@ -228,27 +110,17 @@
         <div class="market-value">€2k</div>
       </div>
     </div>
-    <div class="profile-container">
-      <div class="player-info">
-        <h2>Player Overview</h2>
-        <div class="info-grid">
-          <div class="info-item"><strong>Nationality:</strong><br>Nigeria</div>
-          <div class="info-item"><strong>Position:</strong><br>Right Winger</div>
-          <div class="info-item"><strong>Club:</strong><br>USC Trojans</div>
-          <div class="info-item"><strong>Preferred Foot:</strong><br>Left</div>
-          <div class="info-item"><strong>Height:</strong><br>6'3" (191 cm)</div>
-          <div class="info-item"><strong>Market Value:</strong><br>€2k</div>
-        </div>
-      </div>
-    </div>
+
     <div class="season-selector">
       <label for="seasonSelect"><strong>Select Season: </strong></label>
       <select id="seasonSelect">
         <option value="2025a">Season 2025a</option>
+        <option value="2025b">Season 2025b</option>
         <option value="2024a">Season 2024a</option>
         <option value="2024b">Season 2024b</option>
       </select>
     </div>
+
     <div class="stats-section">
       <h2 id="seasonTitle">Season Stats (2025a)</h2>
       <table id="statsTable">
@@ -262,21 +134,45 @@
             <th>Red Cards</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Stats populated by JavaScript -->
-        </tbody>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="stats-section">
+      <h2>Overall Balance</h2>
+      <table id="overallTable">
+        <thead>
+          <tr>
+            <th>Competition</th>
+            <th>Total Appearances</th>
+            <th>Total Goals</th>
+            <th>Total Assists</th>
+            <th>Total Yellow Cards</th>
+            <th>Total Red Cards</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
       </table>
     </div>
   </div>
+
   <script>
     const seasonStats = {
       "2025a": {
         title: "Season Stats (2025a)",
         rows: [
-          { comp: "USC", apps: 15, goals: 22, assists: 16, yellow: "-", red: "-" },
-          { comp: "Expo", apps: 3, goals: 4, assists: 5, yellow: "-", red: "-" },
-          { comp: "K town", apps: 1, goals: 3, assists: "-", yellow: "-", red: "-" },
-          { comp: "Total", apps: 19, goals: 29, assists: 21, yellow: "-", red: "-" }
+          { comp: "USC", apps: 15, goals: 22, assists: 16, yellow: 0, red: 0 },
+          { comp: "Expo", apps: 3, goals: 4, assists: 5, yellow: 0, red: 0 },
+          { comp: "K town", apps: 1, goals: 3, assists: 0, yellow: 0, red: 0 },
+          { comp: "Total", apps: 19, goals: 29, assists: 21, yellow: 0, red: 0 }
+        ]
+      },
+      "2025b": {
+        title: "Season Stats (2025b)",
+        rows: [
+          { comp: "NY Ball", apps: 1, goals: 1, assists: 0, yellow: 0, red: 0 },
+          { comp: "USC", apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 },
+          { comp: "Total", apps: 1, goals: 1, assists: 0, yellow: 0, red: 0 }
         ]
       },
       "2024a": {
@@ -305,11 +201,11 @@
     const seasonSelect = document.getElementById("seasonSelect");
     const statsTableBody = document.querySelector("#statsTable tbody");
     const seasonTitle = document.getElementById("seasonTitle");
+    const overallTableBody = document.querySelector("#overallTable tbody");
 
     function renderTable(seasonKey) {
       const season = seasonStats[seasonKey];
       seasonTitle.textContent = season.title;
-
       statsTableBody.innerHTML = "";
 
       season.rows.forEach(row => {
@@ -326,7 +222,60 @@
       });
     }
 
+    function renderOverall() {
+      const totals = {};
+      for (const seasonKey in seasonStats) {
+        seasonStats[seasonKey].rows.forEach(row => {
+          if (row.comp !== "Total") {
+            if (!totals[row.comp]) {
+              totals[row.comp] = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
+            }
+            totals[row.comp].apps += row.apps;
+            totals[row.comp].goals += row.goals;
+            totals[row.comp].assists += row.assists;
+            totals[row.comp].yellow += row.yellow;
+            totals[row.comp].red += row.red;
+          }
+        });
+      }
+
+      overallTableBody.innerHTML = "";
+      let grand = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
+      for (const comp in totals) {
+        const row = totals[comp];
+        grand.apps += row.apps;
+        grand.goals += row.goals;
+        grand.assists += row.assists;
+        grand.yellow += row.yellow;
+        grand.red += row.red;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${comp}</td>
+          <td>${row.apps}</td>
+          <td>${row.goals}</td>
+          <td>${row.assists}</td>
+          <td>${row.yellow}</td>
+          <td>${row.red}</td>
+        `;
+        overallTableBody.appendChild(tr);
+      }
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><strong>Grand Total</strong></td>
+        <td>${grand.apps}</td>
+        <td>${grand.goals}</td>
+        <td>${grand.assists}</td>
+        <td>${grand.yellow}</td>
+        <td>${grand.red}</td>
+      `;
+      overallTableBody.appendChild(tr);
+    }
+
     renderTable(seasonSelect.value);
+    renderOverall();
+
     seasonSelect.addEventListener("change", e => renderTable(e.target.value));
   </script>
 </body>
