@@ -2,299 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chidubem Ezenna - Player Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player Overview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      color: #333;
-      min-height: 100vh;
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .container {
-      background-color: rgba(255, 255, 255, 0.7);
-      margin: 0 auto;
-      max-width: 1200px;
-      padding: 1rem;
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    nav {
-      background-color: #003087;
-      padding: 0.5rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .table-container {
+      display: none;
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
-    }
-    nav a:hover {
-      color: #ffd700;
-    }
-    .profile-header {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: rgba(227, 227, 227, 0.9);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: relative;
-      min-height: 150px;
-    }
-    .profile-header img {
-      width: 150px;
-      border-radius: 12px;
-    }
-    .profile-header .player-details {
-      margin-left: auto;
-      text-align: right;
-    }
-    .profile-header .number {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 4rem;
-      font-weight: bold;
-      color: #003087;
-    }
-    .profile-container {
-      display: flex;
-      padding: 2rem;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .player-info {
-      flex: 2;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .info-item {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    th, td {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    tbody tr:last-child td {
-      font-weight: bold;
+    .table-container.active {
+      display: block;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <nav>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-6xl mx-auto p-6">
+    <!-- Player Header -->
+    <div class="flex items-center space-x-6 mb-8">
+      <img src="player.jpg" alt="Player Photo" class="w-32 h-32 rounded-full shadow-lg" />
       <div>
-        <a href="index.html">Profile</a>
-        <a href="https://www.instagram.com/odj_skillz/">Instagram</a>
-        <a href="attributes.html">Attributes</a>
-        <a href="skills.html">Videos</a>
-      </div>
-      <div class="nav-right">
-        <a href="index.html">Login</a>
-      </div>
-    </nav>
-
-    <div class="profile-header">
-      <div class="player-photo">
-        <img src="Screenshot_2025-07-21_at_00.15.00-removebg-preview.png" alt="Chidubem Ezenna">
-      </div>
-      <div class="number">#7</div>
-      <div class="player-details">
-        <h1>Chidubem Ezenna</h1>
-        <p>Right Winger | Nigerian | Age: 23</p>
-        <div class="market-value">€2k</div>
+        <h1 class="text-4xl font-bold">Player Name</h1>
+        <p class="text-gray-600">Forward - USC Trojans</p>
       </div>
     </div>
 
-    <div class="profile-container">
-      <div class="player-info">
-        <h2>Player Overview</h2>
-        <div class="info-grid">
-          <div class="info-item"><strong>Nationality:</strong><br>Nigeria</div>
-          <div class="info-item"><strong>Position:</strong><br>Right Winger</div>
-          <div class="info-item"><strong>Club:</strong><br>USC Trojans</div>
-          <div class="info-item"><strong>Preferred Foot:</strong><br>Left</div>
-          <div class="info-item"><strong>Height:</strong><br>6'3" (191 cm)</div>
-          <div class="info-item"><strong>Market Value:</strong><br>€2k</div>
-        </div>
+    <!-- Overview Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+      <div class="bg-white rounded-xl p-4 shadow card">
+        <p class="text-sm text-gray-500">Nationality</p>
+        <p class="font-semibold">Irish / Nigerian</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 shadow card">
+        <p class="text-sm text-gray-500">Preferred Foot</p>
+        <p class="font-semibold">Right</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 shadow card">
+        <p class="text-sm text-gray-500">Height</p>
+        <p class="font-semibold">1.80 m</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 shadow card">
+        <p class="text-sm text-gray-500">Club</p>
+        <p class="font-semibold">USC</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 shadow card">
+        <p class="text-sm text-gray-500">Market Value</p>
+        <p class="font-semibold">€250k</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 shadow card">
+        <p class="text-sm text-gray-500">Position</p>
+        <p class="font-semibold">Forward</p>
       </div>
     </div>
 
-    <div class="season-selector">
-      <label for="seasonSelect"><strong>Select Season: </strong></label>
-      <select id="seasonSelect">
-        <option value="2025a">Season 2025a</option>
+    <!-- Season Selector -->
+    <div class="mb-4">
+      <label for="seasonSelect" class="block mb-2 font-medium">Select Season</label>
+      <select id="seasonSelect" class="p-2 rounded border">
         <option value="2025b">Season 2025b</option>
-        <option value="2024a">Season 2024a</option>
+        <option value="2025a">Season 2025a</option>
         <option value="2024b">Season 2024b</option>
+        <option value="2024a">Season 2024a</option>
         <option value="overall">Overall Balance</option>
       </select>
     </div>
 
-    <div class="stats-section">
-      <h2 id="seasonTitle">Season Stats (2025a)</h2>
-      <table id="statsTable">
-        <thead>
+    <!-- Tables -->
+    <div id="2025b" class="table-container active">
+      <table class="min-w-full bg-white rounded-xl shadow card">
+        <thead class="bg-gray-200">
           <tr>
-            <th>Competition</th>
-            <th>Appearances</th>
-            <th>Goals</th>
-            <th>Assists</th>
-            <th>Yellow Cards</th>
-            <th>Red Cards</th>
+            <th class="py-2 px-4">Club</th>
+            <th class="py-2 px-4">Apps</th>
+            <th class="py-2 px-4">Goals</th>
+            <th class="py-2 px-4">Assists</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4">NY Ball</td>
+            <td class="py-2 px-4">1</td>
+            <td class="py-2 px-4">1</td>
+            <td class="py-2 px-4">0</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4">USC</td>
+            <td class="py-2 px-4">0</td>
+            <td class="py-2 px-4">0</td>
+            <td class="py-2 px-4">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="2025a" class="table-container">
+      <table class="min-w-full bg-white rounded-xl shadow card">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="py-2 px-4">Club</th>
+            <th class="py-2 px-4">Apps</th>
+            <th class="py-2 px-4">Goals</th>
+            <th class="py-2 px-4">Assists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4">USC</td>
+            <td class="py-2 px-4">5</td>
+            <td class="py-2 px-4">3</td>
+            <td class="py-2 px-4">1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="2024b" class="table-container">
+      <table class="min-w-full bg-white rounded-xl shadow card">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="py-2 px-4">Club</th>
+            <th class="py-2 px-4">Apps</th>
+            <th class="py-2 px-4">Goals</th>
+            <th class="py-2 px-4">Assists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4">USC</td>
+            <td class="py-2 px-4">10</td>
+            <td class="py-2 px-4">7</td>
+            <td class="py-2 px-4">2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="2024a" class="table-container">
+      <table class="min-w-full bg-white rounded-xl shadow card">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="py-2 px-4">Club</th>
+            <th class="py-2 px-4">Apps</th>
+            <th class="py-2 px-4">Goals</th>
+            <th class="py-2 px-4">Assists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4">USC</td>
+            <td class="py-2 px-4">8</td>
+            <td class="py-2 px-4">4</td>
+            <td class="py-2 px-4">3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="overall" class="table-container">
+      <table class="min-w-full bg-white rounded-xl shadow card">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="py-2 px-4">Competition</th>
+            <th class="py-2 px-4">Apps</th>
+            <th class="py-2 px-4">Goals</th>
+            <th class="py-2 px-4">Assists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-2 px-4">All Seasons Total</td>
+            <td class="py-2 px-4">24</td>
+            <td class="py-2 px-4">15</td>
+            <td class="py-2 px-4">6</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
 
   <script>
-    const seasonStats = {
-      "2025a": {
-        title: "Season Stats (2025a)",
-        rows: [
-          { comp: "USC", apps: 15, goals: 22, assists: 16, yellow: 0, red: 0 },
-          { comp: "Expo", apps: 3, goals: 4, assists: 5, yellow: 0, red: 0 },
-          { comp: "K town", apps: 1, goals: 3, assists: 0, yellow: 0, red: 0 },
-          { comp: "Total", apps: 19, goals: 29, assists: 21, yellow: 0, red: 0 }
-        ]
-      },
-      "2025b": {
-        title: "Season Stats (2025b)",
-        rows: [
-          { comp: "NY Ball", apps: 1, goals: 1, assists: 0, yellow: 0, red: 0 },
-          { comp: "USC", apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 },
-          { comp: "Total", apps: 1, goals: 1, assists: 0, yellow: 0, red: 0 }
-        ]
-      },
-      "2024a": {
-        title: "Season Stats (2024a)",
-        rows: [
-          { comp: "Dublin Indoor", apps: 12, goals: 14, assists: 10, yellow: 0, red: 0 },
-          { comp: "Blanch", apps: 4, goals: 4, assists: 4, yellow: 0, red: 0 },
-          { comp: "Cup", apps: 1, goals: 0, assists: 0, yellow: 0, red: 0 },
-          { comp: "Grange", apps: 1, goals: 2, assists: 0, yellow: 0, red: 0 },
-          { comp: "Total", apps: 18, goals: 20, assists: 14, yellow: 0, red: 0 }
-        ]
-      },
-      "2024b": {
-        title: "Season Stats (2024b)",
-        rows: [
-          { comp: "Dublin Indoor", apps: 10, goals: 11, assists: 8, yellow: 0, red: 0 },
-          { comp: "Blanch", apps: 2, goals: 0, assists: 1, yellow: 0, red: 0 },
-          { comp: "Naij Boys", apps: 1, goals: 0, assists: 0, yellow: 0, red: 0 },
-          { comp: "Athlone", apps: 3, goals: 2, assists: 2, yellow: 0, red: 0 },
-          { comp: "Free A", apps: 1, goals: 0, assists: 0, yellow: 0, red: 0 },
-          { comp: "Total", apps: 17, goals: 13, assists: 11, yellow: 0, red: 0 }
-        ]
-      }
-    };
+    const seasonSelect = document.getElementById('seasonSelect');
+    const tables = document.querySelectorAll('.table-container');
 
-    const seasonSelect = document.getElementById("seasonSelect");
-    const statsTableBody = document.querySelector("#statsTable tbody");
-    const seasonTitle = document.getElementById("seasonTitle");
-
-    function renderTable(seasonKey) {
-      statsTableBody.innerHTML = "";
-
-      if (seasonKey === "overall") {
-        seasonTitle.textContent = "Overall Balance";
-        const totals = {};
-
-        for (const key in seasonStats) {
-          seasonStats[key].rows.forEach(row => {
-            if (row.comp !== "Total") {
-              if (!totals[row.comp]) {
-                totals[row.comp] = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
-              }
-              totals[row.comp].apps += row.apps;
-              totals[row.comp].goals += row.goals;
-              totals[row.comp].assists += row.assists;
-              totals[row.comp].yellow += row.yellow;
-              totals[row.comp].red += row.red;
-            }
-          });
-        }
-
-        let grand = { apps: 0, goals: 0, assists: 0, yellow: 0, red: 0 };
-        for (const comp in totals) {
-          const row = totals[comp];
-          grand.apps += row.apps;
-          grand.goals += row.goals;
-          grand.assists += row.assists;
-          grand.yellow += row.yellow;
-          grand.red += row.red;
-
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${comp}</td>
-            <td>${row.apps}</td>
-            <td>${row.goals}</td>
-            <td>${row.assists}</td>
-            <td>${row.yellow}</td>
-            <td>${row.red}</td>
-          `;
-          statsTableBody.appendChild(tr);
-        }
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><strong>Grand Total</strong></td>
-          <td>${grand.apps}</td>
-          <td>${grand.goals}</td>
-          <td>${grand.assists}</td>
-          <td>${grand.yellow}</td>
-          <td>${grand.red}</td>
-        `;
-        statsTableBody.appendChild(tr);
-
-      } else {
-        const season = seasonStats[seasonKey];
-        seasonTitle.textContent = season.title;
-        season.rows.forEach(row => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${row.comp}</td>
-            <td>${row.apps}</td>
-            <td>${row.goals}</td>
-            <td>${row.assists}</td>
-            <td>${row.yellow}</td>
-            <td>${row.red}</td>
-          `;
-          statsTableBody.appendChild(tr);
-        });
-      }
-    }
-
-    renderTable(seasonSelect.value);
-    seasonSelect.addEventListener("change", e => renderTable(e.target.value));
+    seasonSelect.addEventListener('change', function() {
+      tables.forEach(t => t.classList.remove('active'));
+      document.getElementById(this.value).classList.add('active');
+    });
   </script>
 </body>
 </html>
