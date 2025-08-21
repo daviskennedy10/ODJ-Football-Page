@@ -3,151 +3,618 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chidubem Ezenna - Player Profile</title>
+  <title>Chidubem Ezenna - Elite Player Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    body {
-      background-image: url(6a146571-9237-4717-b020-f2e4c5477040.JPG);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
+    * {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      color: #333;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #16213e;
+      --accent: #0f3460;
+      --gold: #ffd700;
+      --white: #ffffff;
+      --light-blue: #4a90e2;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --danger: #f44336;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.2);
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    }
+
+    body {
+      background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+      font-family: 'Inter', sans-serif;
+      color: var(--white);
       min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    /* Animated background particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+    }
+
     .container {
-      background-color: rgba(255, 255, 255, 0.7);
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
       margin: 0 auto;
-      max-width: 1200px;
-      padding: 1rem;
+      padding: 0 2rem;
     }
+
+    /* Navigation */
     nav {
-      background-color: #003087;
-      padding: 0.5rem 1rem;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26, 26, 46, 0.98);
+      box-shadow: var(--shadow);
+    }
+
+    .nav-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1rem;
+
+    .nav-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    nav a:hover {
-      color: #ffd700;
-    }
-    .profile-header {
+
+    .nav-links {
       display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: rgba(227, 227, 227, 0.9);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
       position: relative;
-      min-height: 150px;
+      overflow: hidden;
     }
-    .profile-header img {
-      width: 150px;
-      border-radius: 12px;
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      transition: left 0.3s ease;
+      z-index: -1;
     }
-    .profile-header .player-details {
-      margin-left: auto;
-      text-align: right;
+
+    .nav-link:hover::before {
+      left: 0;
     }
-    .profile-header .number {
+
+    .nav-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Profile Header */
+    .profile-header {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      margin: 3rem 0;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .profile-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-gold);
+      transform: scaleX(0);
+      transition: transform 0.6s ease;
+    }
+
+    .profile-header:hover::before {
+      transform: scaleX(1);
+    }
+
+    .profile-header:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .profile-content {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .player-photo {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .player-photo:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .player-photo img {
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 4px solid var(--gold);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .player-photo::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid var(--gold);
+      border-radius: 25px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .player-photo:hover::after {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .player-number {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 4rem;
-      font-weight: bold;
-      color: #003087;
+      font-size: 8rem;
+      font-weight: 800;
+      color: var(--gold);
+      opacity: 0.3;
+      z-index: -1;
+      animation: pulse 2s ease-in-out infinite;
     }
-    .profile-container {
-      display: flex;
-      padding: 2rem;
-      gap: 2rem;
-      flex-wrap: wrap;
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+      50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5; }
     }
-    .player-info {
-      flex: 2;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .info-item {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-    th, td {
-      padding: 0.75rem;
-      border: 1px solid #ddd;
+
+    .player-details {
       text-align: center;
     }
-    th {
-      background-color: #f2f2f2;
+
+    .player-name {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    tbody tr:last-child td {
-      font-weight: bold;
+
+    .player-position {
+      font-size: 1.2rem;
+      color: var(--light-blue);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .player-info {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .market-value {
+      display: inline-block;
+      background: var(--gradient-gold);
+      color: var(--primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .market-value:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .stat-card:hover::before {
+      left: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--gold);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+    }
+
+    /* Season Selector */
+    .season-selector {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .season-selector label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-right: 1rem;
+      color: var(--white);
+    }
+
+    .season-selector select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 0.75rem 1.5rem;
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .season-selector select:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .season-selector select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    }
+
+    /* Stats Table */
+    .stats-section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      overflow: hidden;
+    }
+
+    .stats-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--gold);
+    }
+
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .stats-table th {
+      background: rgba(74, 144, 226, 0.2);
+      color: var(--white);
+      padding: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stats-table th:hover {
+      background: rgba(74, 144, 226, 0.3);
+      transform: scale(1.02);
+    }
+
+    .stats-table td {
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stats-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .stats-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.01);
+    }
+
+    .stats-table tbody tr:last-child {
+      background: rgba(255, 215, 0, 0.1);
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stats-table tbody tr:last-child:hover {
+      background: rgba(255, 215, 0, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .profile-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .player-photo img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .player-number {
+        font-size: 5rem;
+      }
+
+      .player-name {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffed4e;
     }
   </style>
 </head>
 <body>
+  <!-- Animated Background Particles -->
+  <div class="particles" id="particles"></div>
+
   <div class="container">
-    <nav>
-      <div>
-        <a href="index.html">Profile</a>
-        <a href="https://www.instagram.com/odj_skillz/">Instagram</a>
-        <a href="attributes.html">Attributes</a>
-        <a href="skills.html">Videos</a>
-      </div>
-      <div class="nav-right">
-        <a href="index.html">Login</a>
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <i class="fas fa-futbol"></i> Elite Profile
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-user"></i> Profile
+          </a>
+          <a href="https://www.instagram.com/odj_skillz/" class="nav-link">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+          <a href="attributes.html" class="nav-link">
+            <i class="fas fa-chart-line"></i> Attributes
+          </a>
+          <a href="skills.html" class="nav-link">
+            <i class="fas fa-video"></i> Videos
+          </a>
+        </div>
       </div>
     </nav>
 
-    <div class="profile-header">
-      <div class="player-photo">
-        <img src="Screenshot_2025-07-21_at_00.15.00-removebg-preview.png" alt="Chidubem Ezenna">
-      </div>
-      <div class="number">#7</div>
-      <div class="player-details">
-        <h1>Chidubem Ezenna</h1>
-        <p>Right Winger | Nigerian | Age: 23</p>
-        <div class="market-value">€2k</div>
-      </div>
-    </div>
-
-    <div class="profile-container">
-      <div class="player-info">
-        <h2>Player Overview</h2>
-        <div class="info-grid">
-          <div class="info-item"><strong>Nationality:</strong><br>Nigeria</div>
-          <div class="info-item"><strong>Position:</strong><br>Right Winger</div>
-          <div class="info-item"><strong>Club:</strong><br>USC Trojans</div>
-          <div class="info-item"><strong>Preferred Foot:</strong><br>Left</div>
-          <div class="info-item"><strong>Height:</strong><br>6'3" (191 cm)</div>
-          <div class="info-item"><strong>Market Value:</strong><br>€2k</div>
+    <!-- Profile Header -->
+    <div class="profile-header fade-in">
+      <div class="player-number">#7</div>
+      <div class="profile-content">
+        <div class="player-photo">
+          <img src="Screenshot_2025-07-21_at_00.15.00-removebg-preview.png" alt="Chidubem Ezenna">
+        </div>
+        <div class="player-details">
+          <h1 class="player-name">Chidubem Ezenna</h1>
+          <p class="player-position">Right Winger | Nigerian</p>
+          <p class="player-info">Age: 23 | Height: 6'3" (191 cm)</p>
+          <div class="market-value">€2k</div>
         </div>
       </div>
     </div>
 
-    <div class="season-selector">
-      <label for="seasonSelect"><strong>Select Season: </strong></label>
+    <!-- Stats Grid -->
+    <div class="stats-grid fade-in">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div class="stat-value">29</div>
+        <div class="stat-label">Goals (2025a)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-hands-helping"></i>
+        </div>
+        <div class="stat-value">21</div>
+        <div class="stat-label">Assists (2025a)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-running"></i>
+        </div>
+        <div class="stat-value">19</div>
+        <div class="stat-label">Appearances (2025a)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="stat-value">55</div>
+        <div class="stat-label">Total Goals</div>
+      </div>
+    </div>
+
+    <!-- Season Selector -->
+    <div class="season-selector fade-in">
+      <label for="seasonSelect">
+        <i class="fas fa-calendar-alt"></i> Select Season:
+      </label>
       <select id="seasonSelect">
         <option value="2025a">Season 2025a</option>
         <option value="2025b">Season 2025b</option>
@@ -157,25 +624,31 @@
       </select>
     </div>
 
-    <div class="stats-section">
-      <h2 id="seasonTitle">Season Stats (2025a)</h2>
-      <table id="statsTable">
-        <thead>
-          <tr>
-            <th>Competition</th>
-            <th>Appearances</th>
-            <th>Goals</th>
-            <th>Assists</th>
-            <th>Yellow Cards</th>
-            <th>Red Cards</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <!-- Stats Section -->
+    <div class="stats-section fade-in">
+      <h2 id="seasonTitle">
+        <i class="fas fa-chart-bar"></i> Season Stats (2025a)
+      </h2>
+      <div class="table-container">
+        <table class="stats-table" id="statsTable">
+          <thead>
+            <tr>
+              <th><i class="fas fa-flag"></i> Competition</th>
+              <th><i class="fas fa-gamepad"></i> Appearances</th>
+              <th><i class="fas fa-bullseye"></i> Goals</th>
+              <th><i class="fas fa-hands-helping"></i> Assists</th>
+              <th><i class="fas fa-exclamation-triangle"></i> Yellow Cards</th>
+              <th><i class="fas fa-times-circle"></i> Red Cards</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <script>
+    // Season stats data
     const seasonStats = {
       "2025a": {
         title: "Season Stats (2025a)",
@@ -217,15 +690,57 @@
       }
     };
 
+    // DOM elements
     const seasonSelect = document.getElementById("seasonSelect");
     const statsTableBody = document.querySelector("#statsTable tbody");
     const seasonTitle = document.getElementById("seasonTitle");
 
+    // Create animated background particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Navbar scroll effect
+    function handleNavbarScroll() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    // Scroll animations
+    function handleScrollAnimations() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Render stats table
     function renderTable(seasonKey) {
       statsTableBody.innerHTML = "";
 
       if (seasonKey === "overall") {
-        seasonTitle.textContent = "Overall Balance";
+        seasonTitle.innerHTML = '<i class="fas fa-chart-bar"></i> Overall Balance';
         const totals = {};
 
         for (const key in seasonStats) {
@@ -253,6 +768,7 @@
           grand.red += row.red;
 
           const tr = document.createElement("tr");
+          tr.className = "loading";
           tr.innerHTML = `
             <td>${comp}</td>
             <td>${row.apps}</td>
@@ -265,6 +781,7 @@
         }
 
         const tr = document.createElement("tr");
+        tr.className = "loading";
         tr.innerHTML = `
           <td><strong>Grand Total</strong></td>
           <td>${grand.apps}</td>
@@ -277,9 +794,11 @@
 
       } else {
         const season = seasonStats[seasonKey];
-        seasonTitle.textContent = season.title;
-        season.rows.forEach(row => {
+        seasonTitle.innerHTML = `<i class="fas fa-chart-bar"></i> ${season.title}`;
+        season.rows.forEach((row, index) => {
           const tr = document.createElement("tr");
+          tr.className = "loading";
+          tr.style.animationDelay = `${index * 0.1}s`;
           tr.innerHTML = `
             <td>${row.comp}</td>
             <td>${row.apps}</td>
@@ -293,8 +812,39 @@
       }
     }
 
-    renderTable(seasonSelect.value);
-    seasonSelect.addEventListener("change", e => renderTable(e.target.value));
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      renderTable(seasonSelect.value);
+      
+      // Event listeners
+      seasonSelect.addEventListener("change", e => renderTable(e.target.value));
+      window.addEventListener('scroll', () => {
+        handleNavbarScroll();
+        handleScrollAnimations();
+      });
+      
+      // Initial scroll animation check
+      handleScrollAnimations();
+    });
+
+    // Add loading animation to table rows
+    function animateTableRows() {
+      const rows = document.querySelectorAll('.loading');
+      rows.forEach((row, index) => {
+        setTimeout(() => {
+          row.style.opacity = '1';
+          row.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+    }
+
+    // Enhanced table rendering with animations
+    const originalRenderTable = renderTable;
+    renderTable = function(seasonKey) {
+      originalRenderTable(seasonKey);
+      setTimeout(animateTableRows, 100);
+    };
   </script>
 </body>
 </html>
