@@ -387,38 +387,71 @@
     }
 
     /* Stats Table */
-    .table-container {
-      width: 100%;
-      overflow-x: visible;
-      -webkit-overflow-scrolling: touch;
-    }
-    .scroll-hint {
-      display: none;
-      text-align: right;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 0.5rem;
-    }
-    /* Table responsive overrides */
     .stats-section {
-      overflow: visible;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      overflow: hidden;
     }
-    @media (max-width: 768px) {
-      .table-container {
-        overflow-x: auto;
-      }
-      .stats-table {
-        min-width: 720px;
-      }
-      .stats-table th,
-      .stats-table td {
-        padding: 0.75rem;
-        font-size: 0.9rem;
-        white-space: nowrap;
-      }
-      .scroll-hint {
-        display: block;
-      }
+
+    .stats-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--gold);
+    }
+
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .stats-table th {
+      background: rgba(74, 144, 226, 0.2);
+      color: var(--white);
+      padding: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stats-table th:hover {
+      background: rgba(74, 144, 226, 0.3);
+      transform: scale(1.02);
+    }
+
+    .stats-table td {
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stats-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .stats-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.01);
+    }
+
+    .stats-table tbody tr:last-child {
+      background: rgba(255, 215, 0, 0.1);
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stats-table tbody tr:last-child:hover {
+      background: rgba(255, 215, 0, 0.2);
     }
 
     /* Responsive Design */
@@ -529,7 +562,7 @@
           <a href="skills.html" class="nav-link">
             <i class="fas fa-video"></i> Videos
           </a>
-      </div>
+        </div>
       </div>
     </nav>
 
@@ -537,14 +570,14 @@
     <div class="profile-header fade-in">
       <div class="player-number">#7</div>
       <div class="profile-content">
-      <div class="player-photo">
-        <img src="Screenshot_2025-07-21_at_00.15.00-removebg-preview.png" alt="Chidubem Ezenna">
-      </div>
-      <div class="player-details">
+        <div class="player-photo">
+          <img src="Screenshot_2025-07-21_at_00.15.00-removebg-preview.png" alt="Chidubem Ezenna">
+        </div>
+        <div class="player-details">
           <h1 class="player-name">Chidubem Ezenna</h1>
           <p class="player-position">Right Winger | Nigerian</p>
           <p class="player-info">Age: 23 | Height: 6'3" (191 cm)</p>
-        <div class="market-value">€2k</div>
+          <div class="market-value">€2k</div>
         </div>
       </div>
     </div>
@@ -602,19 +635,18 @@
       </h2>
       <div class="table-container">
         <table class="stats-table" id="statsTable">
-        <thead>
-          <tr>
+          <thead>
+            <tr>
               <th><i class="fas fa-flag"></i> Competition</th>
               <th><i class="fas fa-gamepad"></i> Appearances</th>
               <th><i class="fas fa-bullseye"></i> Goals</th>
               <th><i class="fas fa-hands-helping"></i> Assists</th>
               <th><i class="fas fa-exclamation-triangle"></i> Yellow Cards</th>
               <th><i class="fas fa-times-circle"></i> Red Cards</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-        <div class="scroll-hint">Swipe left to see more</div>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -815,11 +847,11 @@
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
       createParticles();
-    renderTable(seasonSelect.value);
+      renderTable(seasonSelect.value);
       updateTopStats();
       
       // Event listeners
-    seasonSelect.addEventListener("change", e => renderTable(e.target.value));
+      seasonSelect.addEventListener("change", e => renderTable(e.target.value));
       window.addEventListener('scroll', () => {
         handleNavbarScroll();
         handleScrollAnimations();
