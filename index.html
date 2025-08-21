@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chidubem Ezenna - Elite Player Profile</title>
+  <title>Chidubem Ezenna - Player Profile</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -222,8 +222,8 @@
     .player-number {
       position: absolute;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      right: 2rem;
+      transform: translateY(-50%);
       font-size: 8rem;
       font-weight: 800;
       color: var(--gold);
@@ -233,8 +233,8 @@
     }
 
     @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-      50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.5; }
+      0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.3; }
+      50% { transform: translateY(-50%) scale(1.1); opacity: 0.5; }
     }
 
     .player-details {
@@ -472,7 +472,11 @@
       }
 
       .player-number {
-        font-size: 5rem;
+        font-size: 4rem;
+        top: 1.5rem;
+        right: 1rem;
+        transform: none;
+        opacity: 0.2;
       }
 
       .player-name {
@@ -543,7 +547,7 @@
     <nav id="navbar">
       <div class="nav-content">
         <div class="nav-brand">
-          <i class="fas fa-futbol"></i> Elite Profile
+          <i class="fas fa-futbol"></i> Player Profile
         </div>
         <div class="nav-links">
           <a href="index.html" class="nav-link">
@@ -582,31 +586,31 @@
     <div class="stats-grid fade-in">
       <div class="stat-card">
         <div class="stat-icon">
-          <i class="fas fa-trophy"></i>
+          <i class="fas fa-calendar-check"></i>
         </div>
-        <div class="stat-value">29</div>
-        <div class="stat-label">Goals (2025a)</div>
+        <div class="stat-value" id="stat-appearances">0</div>
+        <div class="stat-label">Total Appearances</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">
           <i class="fas fa-hands-helping"></i>
         </div>
-        <div class="stat-value">21</div>
-        <div class="stat-label">Assists (2025a)</div>
+        <div class="stat-value" id="stat-assists">0</div>
+        <div class="stat-label">Total Assists</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">
-          <i class="fas fa-running"></i>
+          <i class="fas fa-bullseye"></i>
         </div>
-        <div class="stat-value">19</div>
-        <div class="stat-label">Appearances (2025a)</div>
+        <div class="stat-value" id="stat-goals">0</div>
+        <div class="stat-label">Total Goals</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">
           <i class="fas fa-star"></i>
         </div>
-        <div class="stat-value">55</div>
-        <div class="stat-label">Total Goals</div>
+        <div class="stat-value" id="stat-rating">83</div>
+        <div class="stat-label">Overall Rating</div>
       </div>
     </div>
 
@@ -812,10 +816,39 @@
       }
     }
 
+    // Compute overall totals across all seasons (excluding season 'Total' rows)
+    function computeOverallTotals() {
+      const totals = { apps: 0, assists: 0, goals: 0 };
+      for (const key in seasonStats) {
+        seasonStats[key].rows.forEach(row => {
+          if (row.comp !== 'Total') {
+            totals.apps += row.apps;
+            totals.assists += row.assists;
+            totals.goals += row.goals;
+          }
+        });
+      }
+      return totals;
+    }
+
+    // Update top KPI stat cards
+    function updateTopStats() {
+      const totals = computeOverallTotals();
+      const elApps = document.getElementById('stat-appearances');
+      const elAssists = document.getElementById('stat-assists');
+      const elGoals = document.getElementById('stat-goals');
+      const elRating = document.getElementById('stat-rating');
+      if (elApps) elApps.textContent = totals.apps;
+      if (elAssists) elAssists.textContent = totals.assists;
+      if (elGoals) elGoals.textContent = totals.goals;
+      if (elRating) elRating.textContent = '83';
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
       createParticles();
       renderTable(seasonSelect.value);
+      updateTopStats();
       
       // Event listeners
       seasonSelect.addEventListener("change", e => renderTable(e.target.value));
