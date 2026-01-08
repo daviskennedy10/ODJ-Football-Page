@@ -620,6 +620,7 @@
         <i class="fas fa-calendar-alt"></i> Select Season:
       </label>
       <select id="seasonSelect">
+        <option value="2026a">Season 2026a</option>
         <option value="2025a">Season 2025a</option>
         <option value="2025b">Season 2025b</option>
         <option value="2024a">Season 2024a</option>
@@ -654,6 +655,12 @@
   <script>
     // Season stats data
     const seasonStats = {
+      "2026a": {
+        title: "Season Stats (2026a)",
+        rows: [
+          { comp: "Dublin Indoor", apps: 3, goals: 3, assists: 3, yellow: 0, red: 0 }
+        ]
+      },
       "2025a": {
         title: "Season Stats (2025a)",
         rows: [
