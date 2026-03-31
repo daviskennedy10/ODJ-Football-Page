@@ -114,7 +114,3 @@ No installation or setup needed.
 
 
 
----
-
-* Add a project folder structure section
-
