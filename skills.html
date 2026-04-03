@@ -126,6 +126,7 @@
     <div class="video-toggle">
       <button class="active" onclick="switchVideo('skills')">Skills & Goals 1</button>
       <button onclick="switchVideo('goals')">Skills & Goals 2</button>
+      <button onclick="switchVideo('third')">Skills & Goals 3</button>
     </div>
   </div>
 
@@ -138,6 +139,8 @@
         videoPlayer.src = 'https://www.youtube.com/embed/ZT98ILbXiIY?rel=0&autoplay=1';
       } else if (type === 'goals') {
         videoPlayer.src = 'https://www.youtube.com/embed/l5pdk-Yu0Sw?rel=0&autoplay=1';
+      } else if (type === 'third') {
+        videoPlayer.src = 'https://www.youtube.com/embed/6lwEzeDz2Oc?rel=0&autoplay=1';
       }
 
       buttons.forEach(button => button.classList.remove('active'));
